@@ -1,13 +1,21 @@
 FROM jamesnetherton/taskwarrior
 
-RUN pip install -y \
+WORKDIR /root
+
+RUN apk add --no-cache \
+	curl \
+	py-pip
+
+RUN pip install \
 	bugwarrior \
 	bugwarrior[jira] \
 	taskwarrior-blocks-capsule
 
-RUN curl -Sso https://gist.githubusercontent.com/BrianHicks/2769821/raw/7b6adf5b074d9959aafb248cc9c0fd58e047e704/graphdeps.py \
+RUN curl -SOs https://gist.githubusercontent.com/BrianHicks/2769821/raw/7b6adf5b074d9959aafb248cc9c0fd58e047e704/graphdeps.py \
  && chmod +x graphdeps.py
 
-RUN task config alias.graph execute graphdeps.py \
- && task config alias.bugs  execute bugwarrior
+COPY taskrc /root/.taskrc
+COPY taskbw /root/.config/bugwarrior/bugwarriorrc
+
+RUN touch taskrc .task 
 

@@ -11,7 +11,7 @@ This requires that a script be put on the path that will run the image with all 
 
 docker run -it ^
 	-v "/etc/localtime:/etc/localtime:ro" ^
-	-v "%HOME%/.taskrc:/root/.taskrc:rw" ^
+	-v "%HOME%/.taskrc:/root/taskrc:rw" ^
 	-v "%HOME%/.taskbw:/root/.config/bugwarrior/bugwarriorrc:rw" ^
 	-v "%HOME%/.task:/root/.task:rw" ^
 	-v "%CD%:/root" ^
