@@ -14,20 +14,21 @@ docker run -it ^
 	-v "%HOME%/.taskrc:/root/taskrc:rw" ^
 	-v "%HOME%/.taskbw:/root/.config/bugwarrior/bugwarriorrc:rw" ^
 	-v "%HOME%/.task:/root/.task:rw" ^
-	-v "%CD%:/root" ^
-	-w "/root" ^
+	-v "%CD%:/root/work" ^
 	tzrlk/taskwarrior %*
 
 ```
 
-Before actually running the script for the first time, make sure to create the `.taskrc`, `.taskbw`, and `.task` files so docker doesn't mistake them for directories, and make sure the `HOME` environment variable points to your user directory (or alternately, use `%USERPROFILE%` instead).
+Note: Before actually running the script for the first time, make sure to create the `.taskrc`, `.taskbw`, and `.task` files so docker doesn't mistake them for directories, and make sure the `HOME` environment variable points to your user directory (or alternately, use `%USERPROFILE%` instead).
+
+Also, make sure that the first line of config in your `.taskrc` file is `include /root/defaults.rc`
 
 ## Plugins
 
-The plugins are preinstalled with their dependencies, but require some configuration to make sure that the aliases are set up to support them. Run the following commands to enable the various plugin executions:
+The plugins are preinstalled with their dependencies, and have aliases set up in the default config for their execution:
 
-* [graphdeps][1]: `task config alias.graph execute graphdeps.py`
-* [bugwarrior][2]: `task config alias.bugs execute bugwarrior`
+* [graphdeps][1]: `task graph`
+* [bugwarrior][2]: `task bugs`
 
 
 [1]: https://gist.github.com/BrianHicks/2769821
